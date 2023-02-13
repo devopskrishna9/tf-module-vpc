@@ -28,10 +28,17 @@ resource "aws_vpc_peering_connection" "peer" {
   )
 }
 
+
 resource "aws_route" "default" {
   route_table_id            = aws_vpc.main.default_route_table_id
   destination_cidr_block    = "172.31.0.0/16"
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
+}
+
+resource "aws_route" "igw-route" {
+  route_table_id            = aws_vpc.main.default_route_table_id
+  destination_cidr_block    = "0.0.0.0/0"
+  vpc_peering_connection_id = aws_internet_gateway.igw.id
 }
 
 resource "aws_route" "default-vpc" {
@@ -66,7 +73,6 @@ resource "aws_instance" "web" {
     Name = "test-centos8"
   }
 }
-
 
 resource "aws_security_group" "allow_tls" {
   name        = "allow_tls"
