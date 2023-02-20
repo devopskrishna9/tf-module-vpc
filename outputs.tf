@@ -9,3 +9,8 @@ output "vpc_peering_connection_id" {
 #output "internet_gw_id" {
 #  value = aws_internet_gateway.igw.id
 #}
+
+output "public_subnet_ids" {
+  value = module.public_subnets
+}
+
