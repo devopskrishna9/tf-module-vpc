@@ -12,7 +12,5 @@ variable "nat_gw" {}
 variable "gateway_id" {
   default = null
 }
-variable "nat_gw_id" {
-  default = null
-}
+variable "nat_gw_id" {}
 
